@@ -66,21 +66,12 @@ function forms(formsSelector) {
                 margin: 0 auto;
             `;
             form.insertAdjacentElement('afterend', statusMessage);
-        
-            const formData = new FormData(form);
 
-            const json = JSON.stringify(Object.fromEntries(formData.entries()));
-
-            postData('http://localhost:3000/requests', json)
-            .then(data => {
-                console.log(data);
-                showThanksModal(message.success);
+            setTimeout(() => {
+                showThanksModal('Спасибо за обращение. Мы скоро свяжемся с Вами!');
                 statusMessage.remove();
-            }).catch(() => {
-                showThanksModal(message.failure);
-            }).finally(() => {
                 form.reset();
-            });
+            }, 2000);
         });
     }
 
@@ -106,28 +97,6 @@ function forms(formsSelector) {
             closeModal('.modal');
         }, 4000);
     }
-}
-
-const postData = async (url, data) => {
-    let res = await fetch(url, {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: data
-    });
-
-    return await res.json();
-};
-
-async function getResource(url) {
-    let res = await fetch(url);
-
-    if (!res.ok) {
-        throw new Error(`Could not fetch ${url}, status: ${res.status}`);
-    }
-
-    return await res.json();
 }
 
 window.addEventListener('DOMContentLoaded', function() {

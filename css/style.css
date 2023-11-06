@@ -20,6 +20,11 @@ html {
     padding: 39px 0 62px 0;
 }
 
+.logo .logo_img {
+    display: block;
+    margin: 0 auto;
+}
+
 .logo .logo_text {
     color: #ffffff;
     font-family: 'Roboto';
